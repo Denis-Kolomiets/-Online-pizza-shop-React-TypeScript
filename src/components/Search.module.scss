@@ -1,0 +1,35 @@
+.search {
+  text-align: center;
+}
+
+.root {
+  position: relative;
+  left: -150px;
+}
+.input {
+  border: 2px solid black;
+  padding: 5px 25px;
+  border-radius: 5px;
+  width: 400px;
+  &:focus {
+    border: 2px solid rgba(0, 0, 0, 0.297);
+  }
+}
+
+.icone {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 5px;
+  left: 3px;
+  opacity: 0.3;
+}
+
+.close {
+  position: absolute;
+  right: 5px;
+  opacity: 0.4;
+  top: 5px;
+  width: 24px;
+  height: 24px;
+}

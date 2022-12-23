@@ -1,4 +1,3 @@
-import Header from './components/Header'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import Card from './pages/Cart'

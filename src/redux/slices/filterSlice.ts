@@ -1,6 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
-
-const initialState = {
+type InitialStateType = {
+  activeCategori: number
+  sort: string
+  search: string
+}
+const initialState: InitialStateType = {
   activeCategori: 0,
   sort: 'rating',
   search: '',

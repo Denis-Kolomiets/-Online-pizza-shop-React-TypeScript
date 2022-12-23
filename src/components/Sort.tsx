@@ -8,16 +8,16 @@ import { useEffect } from 'react'
 function Sort() {
   const dispatch = useDispatch()
   const sort = useSelector((state) => state.filter.sort)
-  const sortRef = useRef()
+  const sortRef = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
 
-  const onClickItem = (item) => {
+  const onClickItem = (item: string) => {
     setIsVisible(false)
     dispatch(SetSort(item))
   }
 
   useEffect(() => {
-    const handlerClickOutside = (event) => {
+    const handlerClickOutside = (event: any) => {
       if (!event.path.includes(sortRef.current)) {
         setIsVisible(false)
       }

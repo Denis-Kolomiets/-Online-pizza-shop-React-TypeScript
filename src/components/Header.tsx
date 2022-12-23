@@ -3,6 +3,10 @@ import { Link, useLocation } from 'react-router-dom'
 import Search from './Search'
 import { useSelector } from 'react-redux'
 import { selectCart } from '../redux/slices/cartSlice'
+import React from 'react'
+interface ReduceCount {
+  count: number
+}
 function Header() {
   const { totalPrice, items } = useSelector(selectCart)
   const location = useLocation()
@@ -56,7 +60,7 @@ function Header() {
                   />
                 </svg>
                 <span>
-                  {items.reduce((count, obj) => {
+                  {items.reduce((count: number, obj: ReduceCount) => {
                     return obj.count + count
                   }, 0)}
                 </span>

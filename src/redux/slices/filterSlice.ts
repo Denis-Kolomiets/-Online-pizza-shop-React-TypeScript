@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 type InitialStateType = {
   activeCategori: number
   sort: string
@@ -14,13 +14,13 @@ const filterSlice = createSlice({
   name: 'filter',
   initialState: initialState,
   reducers: {
-    SetActiveCategori(state, action) {
+    SetActiveCategori(state, action: PayloadAction<number>) {
       state.activeCategori = action.payload
     },
-    SetSort(state, action) {
+    SetSort(state, action: PayloadAction<string>) {
       state.sort = action.payload
     },
-    SetSearchValue(state, action) {
+    SetSearchValue(state, action: PayloadAction<string>) {
       state.search = action.payload
     },
     setFilters(state, action) {

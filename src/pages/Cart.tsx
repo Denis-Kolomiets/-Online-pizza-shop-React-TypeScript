@@ -3,7 +3,19 @@ import { useSelector, useDispatch } from 'react-redux'
 import { clearItem, selectCart } from '../redux/slices/cartSlice'
 import CartEmpty from '../components/CartEmpty'
 import CartItem from '../components/CartItem'
-const Card = () => {
+
+type ItemsType = {
+  id: number
+  imageUrl: string
+  title: string
+  price: number
+  rating: number
+  category: number
+  size: Array<number>
+  type: Array<number>
+  count: number
+}
+const Card: React.FC = () => {
   const { totalPrice, items } = useSelector(selectCart)
   const dispatch = useDispatch()
 
@@ -90,7 +102,7 @@ const Card = () => {
               </div>
             </div>
             <div className="content__items">
-              {items.map((item) => (
+              {items.map((item: ItemsType) => (
                 <CartItem {...item} key={item.id} />
               ))}
             </div>
@@ -99,7 +111,7 @@ const Card = () => {
                 <span>
                   Всего пицц:{' '}
                   <b>
-                    {items.reduce((sum, obj) => {
+                    {items.reduce((sum: number, obj: ItemsType) => {
                       return obj.count + sum
                     }, 0)}
                     шт.

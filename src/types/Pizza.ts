@@ -2,9 +2,9 @@ export type Pizza = {
   id: number
   imageUrl: string
   title: string
-  price: string
-  rating: string
-  category: string
+  price: number
+  rating: number
+  category: number
   sizes: Array<number>
   types: Array<number>
 }

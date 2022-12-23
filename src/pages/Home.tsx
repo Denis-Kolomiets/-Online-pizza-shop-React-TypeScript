@@ -17,10 +17,11 @@ import { useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import Loanding from '../components/Loanding'
 import Error from '../components/Error'
+import { Pizza } from '../types'
 
 // import { SearchContext } from '../App'
 
-const Home = () => {
+const Home: React.FC = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const isMounted = useRef(false)
@@ -34,6 +35,8 @@ const Home = () => {
   const [numberPages, setNumberPages] = useState(0)
   const location = useLocation()
   const filterPizzas = filterCategories(activeCategori)
+  console.log(filterPizzas)
+
   const sortPizzas = sortedPizzas(filterPizzas, sortKey)
   useEffect(() => {
     dispatch(fetchPizzas())
@@ -43,7 +46,7 @@ const Home = () => {
     setNumberPages(Math.ceil(sortPizzas.length / 4))
   }, [sortPizzas])
 
-  function sortedPizzas(filterPizzas, key) {
+  function sortedPizzas(filterPizzas: Pizza[], key) {
     const sortedCourses = [...filterPizzas]
     key === 'ABC'
       ? sortedCourses.sort((a, b) => (a.title > b.title ? 1 : -1))
@@ -51,7 +54,7 @@ const Home = () => {
     return sortedCourses
   }
 
-  function filterCategories(activeCategori) {
+  function filterCategories(activeCategori: Pizza['id']) {
     const filterCategori = [...pizzas]
     if (!activeCategori) {
       return filterCategori
@@ -59,7 +62,7 @@ const Home = () => {
     return filterCategori.filter((pizza) => pizza.category === activeCategori)
   }
 
-  const pizzasSorted = (sortPizzas) => {
+  const pizzasSorted = (sortPizzas: Pizza[]) => {
     return sortPizzas
       .filter((pizza) => {
         return pizza.title.toLowerCase().includes(searchValue.toLowerCase())

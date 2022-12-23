@@ -12,10 +12,8 @@ const SearchPizzas: React.FC = () => {
     }
   }
 
-  // return
   const params = useParams()
   const navigate = useNavigate()
-  const [data, setData] = useState<Pizza[]>()
   const [key, setKey] = useState<number>(Number(params.id))
   const [pizza, setPizza] = useState<Pizza>()
 

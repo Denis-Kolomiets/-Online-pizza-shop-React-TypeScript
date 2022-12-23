@@ -9,26 +9,26 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useRef } from 'react'
 import { useCallback } from 'react'
 
-const Search = () => {
+const Search: React.FC = () => {
   // const { searchValue, setSearchValue } = React.useContext(SearchContext)
   const dispatch = useDispatch()
   const searchValue = useSelector((state) => state.filter.search)
   const [inputValue, setInputValue] = useState('')
-  const inputRef = useRef()
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const onClickClear = () => {
     dispatch(SetSearchValue(''))
     setInputValue('')
-    inputRef.current.focus()
+    inputRef.current?.focus()
   }
 
-  const onChangeInput = (e) => {
+  const onChangeInput = (e: any) => {
     setInputValue(e.target.value)
     updateInputValueDebounce(e.target.value)
   }
 
   const updateInputValueDebounce = useCallback(
-    debounce((e) => dispatch(SetSearchValue(e)), 450),
+    debounce((e: any) => dispatch(SetSearchValue(e)), 450),
     []
   )
 

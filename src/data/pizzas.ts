@@ -1,4 +1,6 @@
-const pizzas = [
+import { Pizza } from '../types'
+
+const pizzas: Pizza[] = [
   {
     id: 0,
     imageUrl:

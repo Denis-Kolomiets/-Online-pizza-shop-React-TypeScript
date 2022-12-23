@@ -3,7 +3,15 @@ import pizzaType from '../data/pizzaType'
 import { addItem, selectCartItemById } from '../redux/slices/cartSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-function PizzaBlock({ price, title, imageUrl, sizes, id, types }) {
+import { Pizza } from '../types'
+const PizzaBlock: React.FC<Pizza> = ({
+  price,
+  title,
+  imageUrl,
+  sizes,
+  id,
+  types,
+}) => {
   const dispatch = useDispatch()
   const cartItem = useSelector(selectCartItemById(id))
   const addedItem = cartItem ? cartItem.count : 0

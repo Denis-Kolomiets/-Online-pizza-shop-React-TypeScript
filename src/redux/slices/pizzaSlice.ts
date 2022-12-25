@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { Pizza } from '../../types'
 
 export const fetchPizzas = createAsyncThunk(
   'pizza/fetchPizzasStatus',
@@ -13,9 +14,14 @@ export const fetchPizzas = createAsyncThunk(
     return thunkAPI.fulfillWithValue(data)
   }
 )
-const initialState = {
+
+interface PizzaStateType {
+  items: Pizza[]
+  status: 'loanding' | 'success' | 'error'
+}
+const initialState: PizzaStateType = {
   items: [],
-  status: '',
+  status: 'loanding',
 }
 
 const pizzaSlice = createSlice({

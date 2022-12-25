@@ -22,7 +22,7 @@ const Search: React.FC = () => {
     inputRef.current?.focus()
   }
 
-  const onChangeInput = (e: any) => {
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
     updateInputValueDebounce(e.target.value)
   }

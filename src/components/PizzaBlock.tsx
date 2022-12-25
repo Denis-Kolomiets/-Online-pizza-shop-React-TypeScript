@@ -14,9 +14,9 @@ const PizzaBlock: React.FC<Pizza> = ({
 }) => {
   const dispatch = useDispatch()
   const cartItem = useSelector(selectCartItemById(id))
-  const addedItem = cartItem ? cartItem.count : 0
-  const [activeSize, SetActiveSize] = useState(0)
-  const [activeType, SetActiveType] = useState(0)
+  const addedItem: number = cartItem ? cartItem.count : 0
+  const [activeSize, SetActiveSize] = useState<number>(0)
+  const [activeType, SetActiveType] = useState<number>(0)
   const onClickAdd = () => {
     const item = {
       id,

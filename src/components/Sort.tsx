@@ -1,24 +1,26 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import sorts from '../data/sort'
 import { SetSort } from '../redux/slices/filterSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRef } from 'react'
 import { useEffect } from 'react'
-
 function Sort() {
   const dispatch = useDispatch()
   const sort = useSelector((state) => state.filter.sort)
   const sortRef = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
 
-  const onClickItem = (item: string) => {
+  const onClickItem: (item: string) => void = (item) => {
     setIsVisible(false)
     dispatch(SetSort(item))
   }
 
   useEffect(() => {
-    const handlerClickOutside = (event: any) => {
-      if (!event.path.includes(sortRef.current)) {
+    const handlerClickOutside = (event: MouseEvent) => {
+      const _event = event as MouseEvent & {
+        path: Node[]
+      }
+      if (sortRef.current && !_event.path.includes(sortRef.current)) {
         setIsVisible(false)
       }
     }

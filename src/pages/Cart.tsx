@@ -19,7 +19,7 @@ const Card: React.FC = () => {
   const { totalPrice, items } = useSelector(selectCart)
   const dispatch = useDispatch()
 
-  const onClickClear = () => {
+  const onClickClear: () => void = () => {
     dispatch(clearItem())
   }
   return (

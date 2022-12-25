@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-type InitialStateType = {
+interface FilterStateType {
   activeCategori: number
-  sort: string
+  sort: 'rating' | 'price' | 'ABC'
   search: string
 }
-const initialState: InitialStateType = {
+const initialState: FilterStateType = {
   activeCategori: 0,
   sort: 'rating',
   search: '',
@@ -17,7 +17,7 @@ const filterSlice = createSlice({
     SetActiveCategori(state, action: PayloadAction<number>) {
       state.activeCategori = action.payload
     },
-    SetSort(state, action: PayloadAction<string>) {
+    SetSort(state, action) {
       state.sort = action.payload
     },
     SetSearchValue(state, action: PayloadAction<string>) {

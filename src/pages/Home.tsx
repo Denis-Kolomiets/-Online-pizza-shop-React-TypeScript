@@ -20,7 +20,27 @@ import Error from '../components/Error'
 import { Pizza } from '../types'
 
 // import { SearchContext } from '../App'
+const sortedPizzas: (filterPizzas: any, key: string) => void[] = (
+  filterPizzas,
+  key
+) => {
+  const sortedCourses = [...filterPizzas]
+  key === 'ABC'
+    ? sortedCourses.sort((a, b) => (a.title > b.title ? 1 : -1))
+    : sortedCourses.sort((a, b) => (a[key] < b[key] ? 1 : -1))
+  return sortedCourses
+}
 
+const filterCategories: (
+  activeCategori: Pizza['id'],
+  pizzas: Pizza[]
+) => void = (activeCategori, pizzas) => {
+  const filterCategori = [...pizzas]
+  if (!activeCategori) {
+    return filterCategori
+  }
+  return filterCategori.filter((pizza) => pizza.category === activeCategori)
+}
 const Home: React.FC = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -30,12 +50,11 @@ const Home: React.FC = () => {
   const pizzas = items
   const sortKey = sort
   const searchValue = search
-  const [firstIndex, setFirstIndex] = useState(0)
-  const [lastIndex, setLastIndex] = useState(4)
-  const [numberPages, setNumberPages] = useState(0)
+  const [firstIndex, setFirstIndex] = useState<number>(0)
+  const [lastIndex, setLastIndex] = useState<number>(4)
+  const [numberPages, setNumberPages] = useState<number>(0)
   const location = useLocation()
-  const filterPizzas = filterCategories(activeCategori)
-  console.log(filterPizzas)
+  const filterPizzas = filterCategories(activeCategori, pizzas)
 
   const sortPizzas = sortedPizzas(filterPizzas, sortKey)
   useEffect(() => {
@@ -45,22 +64,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     setNumberPages(Math.ceil(sortPizzas.length / 4))
   }, [sortPizzas])
-
-  function sortedPizzas(filterPizzas: Pizza[], key) {
-    const sortedCourses = [...filterPizzas]
-    key === 'ABC'
-      ? sortedCourses.sort((a, b) => (a.title > b.title ? 1 : -1))
-      : sortedCourses.sort((a, b) => (a[key] < b[key] ? 1 : -1))
-    return sortedCourses
-  }
-
-  function filterCategories(activeCategori: Pizza['id']) {
-    const filterCategori = [...pizzas]
-    if (!activeCategori) {
-      return filterCategori
-    }
-    return filterCategori.filter((pizza) => pizza.category === activeCategori)
-  }
+  // : (filterPizzas: Pizza[]) => void
 
   const pizzasSorted = (sortPizzas: Pizza[]) => {
     return sortPizzas

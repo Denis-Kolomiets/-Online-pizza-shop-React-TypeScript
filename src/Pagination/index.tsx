@@ -2,8 +2,8 @@ import style from './Pagination.module.scss'
 import ReactPaginate from 'react-paginate'
 
 type PaginationPropsType = {
-  setFirstIndex: (_: number) => void
-  setLastIndex: (_: number) => void
+  setFirstIndex: (page: number) => void
+  setLastIndex: (page: number) => void
   numberPages: number
 }
 const Pagination: React.FC<PaginationPropsType> = ({
@@ -11,7 +11,7 @@ const Pagination: React.FC<PaginationPropsType> = ({
   setLastIndex,
   numberPages,
 }) => {
-  const clickPaginate = (e: number) => {
+  const clickPaginate: (e: number) => void = (e) => {
     switch (e) {
       case 1:
         setFirstIndex(0)

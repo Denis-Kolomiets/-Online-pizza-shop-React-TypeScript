@@ -1,10 +1,12 @@
-import { useDispatch } from 'react-redux'
 import categories from '../data/categories'
 import { SetActiveCategori } from '../redux/slices/filterSlice'
 import { useSelector } from 'react-redux'
+import { RootState, useAppDispatch } from '../redux/store'
 const Categories: React.FC = () => {
-  const activeCategori = useSelector((state) => state.filter.activeCategori)
-  const dispatch = useDispatch()
+  const activeCategori = useSelector(
+    (state: RootState) => state.filter.activeCategori
+  )
+  const dispatch = useAppDispatch()
 
   const onClickCategory: (index: number) => void = (index) => {
     dispatch(SetActiveCategori(index))

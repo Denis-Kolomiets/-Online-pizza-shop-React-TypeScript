@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
-import sorts from '../data/sort'
+import sorts, { SortType } from '../data/sort'
 import { SetSort } from '../redux/slices/filterSlice'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useRef } from 'react'
+import { RootState, useAppDispatch } from '../redux/store'
 import { useEffect } from 'react'
+
 function Sort() {
-  const dispatch = useDispatch()
-  const sort = useSelector((state) => state.filter.sort)
+  const dispatch = useAppDispatch()
+  const sort = useSelector((state: RootState) => state.filter.sort)
   const sortRef = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
 
-  const onClickItem: (item: string) => void = (item) => {
+  const onClickItem: (item: SortType) => void = (item) => {
     setIsVisible(false)
     dispatch(SetSort(item))
   }

@@ -8,22 +8,20 @@ import qs from 'qs'
 // import pizzas from '../data/pizzas'
 import Pagination from '../Pagination'
 import { useRef } from 'react'
-import sortList from '../data/sort'
+import sortList, { SortType } from '../data/sort'
 
 import { setFilters } from '../redux/slices/filterSlice'
 import { fetchPizzas } from '../redux/slices/pizzaSlice'
 import { useLocation } from 'react-router-dom'
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Loanding from '../components/Loanding'
 import Error from '../components/Error'
 import { Pizza } from '../types'
+import { RootState, useAppDispatch } from '../redux/store'
 
 // import { SearchContext } from '../App'
-const sortedPizzas: (filterPizzas: any, key: string) => void[] = (
-  filterPizzas,
-  key
-) => {
+const sortedPizzas = (filterPizzas: Pizza[], key: SortType) => {
   const sortedCourses = [...filterPizzas]
   key === 'ABC'
     ? sortedCourses.sort((a, b) => (a.title > b.title ? 1 : -1))
@@ -31,10 +29,7 @@ const sortedPizzas: (filterPizzas: any, key: string) => void[] = (
   return sortedCourses
 }
 
-const filterCategories: (
-  activeCategori: Pizza['id'],
-  pizzas: Pizza[]
-) => void = (activeCategori, pizzas) => {
+const filterCategories = (activeCategori: Pizza['id'], pizzas: Pizza[]) => {
   const filterCategori = [...pizzas]
   if (!activeCategori) {
     return filterCategori
@@ -42,11 +37,13 @@ const filterCategories: (
   return filterCategori.filter((pizza) => pizza.category === activeCategori)
 }
 const Home: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const isMounted = useRef(false)
-  const { activeCategori, sort, search } = useSelector((state) => state.filter)
-  const { items, status } = useSelector((state) => state.pizza)
+  const { activeCategori, sort, search } = useSelector(
+    (state: RootState) => state.filter
+  )
+  const { items, status } = useSelector((state: RootState) => state.pizza)
   const pizzas = items
   const sortKey = sort
   const searchValue = search
@@ -95,12 +92,16 @@ const Home: React.FC = () => {
     if (location.search) {
       const params = qs.parse(location.search.substring(1))
       const sort = sortList.find((obj) => obj === params.sortKey)
-      dispatch(
-        setFilters({
-          ...params,
-          sort,
-        })
-      )
+      if (sort) {
+        dispatch(
+          setFilters({
+            ...params,
+            sort,
+            activeCategori: 0,
+            search: '',
+          })
+        )
+      }
     }
   }, [])
 

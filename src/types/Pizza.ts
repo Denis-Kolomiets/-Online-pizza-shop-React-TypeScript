@@ -7,4 +7,5 @@ export type Pizza = {
   category: number
   sizes: Array<number>
   types: Array<number>
+  count: number
 }

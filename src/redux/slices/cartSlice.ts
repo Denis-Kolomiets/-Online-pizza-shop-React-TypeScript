@@ -2,7 +2,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Pizza } from '../../types'
 import { RootState } from '../store'
 
-type ItemsType = Pizza & {
+export type ItemsType = {
+  id: number
+  imageUrl: string
+  title: string
+  price: number
+  rating: number
+  category: number
+  sizes: number
+  types: number
   count: number
 }
 interface CartStateType {

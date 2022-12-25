@@ -5,14 +5,15 @@ import style from './Search.module.scss'
 import debounce from 'lodash.debounce'
 
 import { SetSearchValue } from '../redux/slices/filterSlice'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useRef } from 'react'
 import { useCallback } from 'react'
+import { RootState, useAppDispatch } from '../redux/store'
 
 const Search: React.FC = () => {
   // const { searchValue, setSearchValue } = React.useContext(SearchContext)
-  const dispatch = useDispatch()
-  const searchValue = useSelector((state) => state.filter.search)
+  const dispatch = useAppDispatch()
+  const searchValue = useSelector((state: RootState) => state.filter.search)
   const [inputValue, setInputValue] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
 

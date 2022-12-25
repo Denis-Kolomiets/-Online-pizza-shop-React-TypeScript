@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { useAppDispatch } from '../redux/store'
 import { clearItem, selectCart } from '../redux/slices/cartSlice'
 import CartEmpty from '../components/CartEmpty'
 import CartItem from '../components/CartItem'
+import { Pizza } from '../types'
 
 type ItemsType = {
   id: number
@@ -17,7 +19,7 @@ type ItemsType = {
 }
 const Card: React.FC = () => {
   const { totalPrice, items } = useSelector(selectCart)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const onClickClear: () => void = () => {
     dispatch(clearItem())
@@ -102,8 +104,8 @@ const Card: React.FC = () => {
               </div>
             </div>
             <div className="content__items">
-              {items.map((item: ItemsType) => (
-                <CartItem {...item} key={item.id} />
+              {items.map((item) => (
+                <CartItem type={[]} size={[]} {...item} key={item.id} />
               ))}
             </div>
             <div className="cart__bottom">
@@ -111,7 +113,7 @@ const Card: React.FC = () => {
                 <span>
                   Всего пицц:{' '}
                   <b>
-                    {items.reduce((sum: number, obj: ItemsType) => {
+                    {items.reduce((sum, obj) => {
                       return obj.count + sum
                     }, 0)}
                     шт.
